@@ -1,12 +1,13 @@
 :root {
-  --primary-bg: #06140e;      
-  --secondary-bg: #0b2216;    
-  --accent-green: #00ff66;   
-  --accent-hover: #1db954;   
-  --text-white: #ffffff;
-  --text-dark: #1a2e22;
-  --light-gray: #f4f7f5;       
-  --border-color: #cbdad0;
+  --primary-bg: #140d2b;
+  --secondary-bg: #24124d;
+  --accent-purple: #8b5cf6;
+  --accent-hover: #a855f7;
+  --accent-glow: #c084fc;
+  --text-white: #f8f5ff;
+  --text-dark: #2b1a47;
+  --light-gray: #f4ebff;
+  --border-color: #d8c4ff;
 }
 
 * {
@@ -16,9 +17,19 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--light-gray);
   color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 
@@ -57,8 +68,8 @@ body {
 .logo-text {
   font-size: 24px;
   font-weight: bold;
-  color: var(--accent-green); 
-  text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+  color: var(--accent-purple);
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.35);
   letter-spacing: 0.5px;
 }
 
@@ -90,9 +101,9 @@ body {
 }
 
 .search-bar button {
-  background-color: var(--accent-green);
+  background-color: var(--accent-purple);
   border: none;
-  color: var(--primary-bg);
+  color: var(--text-white);
   padding: 0 15px;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
@@ -135,7 +146,7 @@ body {
 .auth-buttons button {
   background: transparent;
   color: white;
-  border: 1px solid var(--accent-green);
+  border: 1px solid var(--accent-purple);
   padding: 6px 12px;
   margin-left: 10px;
   border-radius: 4px;
@@ -144,8 +155,8 @@ body {
 }
 
 .auth-buttons button:hover {
-  background-color: var(--accent-green);
-  color: var(--primary-bg);
+  background-color: var(--accent-purple);
+  color: var(--text-white);
 }
 
 .cart-icon {
@@ -153,13 +164,13 @@ body {
   background-color: var(--secondary-bg);
   padding: 8px 12px;
   border-radius: 4px;
-  border: 1px solid var(--accent-green);
+  border: 1px solid var(--accent-purple);
 }
 
 
 .navbar {
   background-color: var(--secondary-bg);
-  border-bottom: 2px solid var(--accent-green);
+  border-bottom: 2px solid var(--accent-purple);
 }
 
 .navbar ul {
@@ -178,14 +189,14 @@ body {
 }
 
 .navbar ul li a:hover {
-  background-color: var(--accent-green);
-  color: var(--primary-bg);
+  background-color: var(--accent-purple);
+  color: var(--text-white);
 }
 
 
 .banner {
   
-  background: linear-gradient(rgba(6, 20, 14, 0.85), rgba(6, 20, 14, 0.85)), 
+  background: linear-gradient(rgba(20, 6, 18, 0.85), rgba(6, 20, 14, 0.85)), 
               url('https://images.unsplash.com/photo-1584949091598-c31daaaa4aa9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
   background-size: cover;
   color: white;
@@ -193,7 +204,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 60px 5%;
-  border-bottom: 4px solid var(--accent-green);
+  border-bottom: 4px solid var(--accent-purple);
   min-height: 400px;
 }
 
@@ -210,13 +221,13 @@ body {
 
 .banner-text p { 
   margin-bottom: 25px; 
-  color: #a3b899; 
+  color: #d8c4ff; 
   font-size: 1.1rem;
 }
 
 .btn-ofertas {
-  background-color: var(--accent-green);
-  color: var(--primary-bg);
+  background-color: var(--accent-purple);
+  color: var(--text-white);
   padding: 12px 24px;
   border: none;
   border-radius: 4px;
@@ -227,20 +238,20 @@ body {
 
 .btn-ofertas:hover {
   background-color: var(--accent-hover);
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
 }
 
 
 .banner-image img {
   max-width: 320px;
   border-radius: 8px;
-  border: 2px solid var(--accent-green);
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+  border: 2px solid var(--accent-purple);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
 }
 
 .btn-ofertas {
-  background-color: var(--accent-green);
-  color: var(--primary-bg);
+  background-color: var(--accent-purple);
+  color: var(--text-white);
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -257,7 +268,7 @@ body {
 .banner-image img {
   max-width: 300px;
   border-radius: 8px;
-  border: 2px solid var(--accent-green);
+  border: 2px solid var(--accent-purple);
 }
 
 
@@ -327,7 +338,7 @@ body {
 }
 
 .product-card:hover {
-  border-color: var(--accent-green);
+  border-color: var(--accent-purple);
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(11, 34, 22, 0.1);
 }
@@ -359,7 +370,7 @@ body {
 
 .btn-add-cart:hover {
   background-color: var(--secondary-bg);
-  color: var(--accent-green);
+  color: var(--accent-glow);
   border-color: var(--secondary-bg);
 }
 
@@ -381,7 +392,7 @@ body {
 }
 
 .footer-content h3 {
-  color: var(--accent-green);
+  color: var(--accent-purple);
   margin-bottom: 10px;
 }
 
@@ -391,30 +402,110 @@ body {
 }
 
 
-@media (max-width: 900px) {
-  .main-layout { 
-    grid-template-columns: 1fr; 
-  }
-  .header-top { 
-    display: flex; 
-    flex-direction: column; 
+@media (max-width: 1100px) {
+  .header-top {
+    grid-template-columns: 1fr;
     text-align: center;
   }
+
+  .logo-container,
+  .search-bar,
+  .header-socials,
+  .auth-buttons-container {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .logo-container {
+    justify-content: center;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
   .header-socials {
     justify-content: center;
     width: 100%;
   }
+
   .auth-buttons-container {
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
     gap: 10px;
   }
-  .banner { 
-    flex-direction: column; 
-    text-align: center; 
-    gap: 20px; 
+}
+
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
   }
-  .banner-text { 
-    max-width: 100%; 
+
+  .navbar ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 40px 5%;
+  }
+
+  .banner-text {
+    max-width: 100%;
+  }
+
+  .banner-text h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-top {
+    padding: 15px 4%;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-bar input,
+  .search-bar button {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .search-bar button {
+    padding: 10px;
+    margin-top: 8px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .auth-buttons button {
+    margin: 0 5px 8px 0;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-image img {
+    max-width: 100%;
+    max-height: 240px;
+    object-fit: cover;
   }
 }

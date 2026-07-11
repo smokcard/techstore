@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Banner from './components/banner';
@@ -7,50 +7,75 @@ import ProductList from './components/ProductList';
 import Footer from './components/Footer';
 import './assets/css/styles.css';
 
+const API_URL = 'http://localhost:5000/api/productos';
+
 function App() {
   const [productos, setProductos] = useState([]);
   const [carrito, setCarrito] = useState([]);
-  const [busqueda, setBusqueda] = useState("");
+  const [busqueda, setBusqueda] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // Conexión con la API REST de tu backend MongoDB
   useEffect(() => {
-    fetch('http://localhost:5000/api/productos')
-      .then(response => response.json())
-      .then(data => setProductos(data))
-      .catch(error => console.error('Error al conectar con MongoDB backend:', error));
+    const controller = new AbortController();
+
+    const cargarProductos = async () => {
+      setLoading(true);
+      setError('');
+
+      try {
+        const response = await fetch(API_URL, { signal: controller.signal });
+        if (!response.ok) throw new Error('No se pudo cargar el catálogo');
+
+        const data = await response.json();
+        setProductos(Array.isArray(data) ? data : []);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Error al conectar con MongoDB backend:', err);
+          setError('No fue posible cargar los productos. Intenta nuevamente.');
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    cargarProductos();
+
+    return () => controller.abort();
   }, []);
 
-  const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
-  };
+  const agregarAlCarrito = useCallback((producto) => {
+    setCarrito((prev) => {
+      if (prev.some((item) => item.id === producto.id)) return prev;
+      return [...prev, producto];
+    });
+  }, []);
 
-  // Filtrado en tiempo real controlado por el estado "busqueda"
-  const productosFiltrados = productos.filter(prod =>
-    prod.nombre.toLowerCase().includes(busqueda.toLowerCase())
-  );
+  const productosFiltrados = useMemo(() => {
+    const query = busqueda.trim().toLowerCase();
+    if (!query) return productos;
+
+    return productos.filter((prod) => prod.nombre?.toLowerCase().includes(query));
+  }, [productos, busqueda]);
 
   return (
     <div className="app-container">
-      {/* Envía los props de búsqueda y contador al Header */}
-      <Header 
-        cartCount={carrito.length} 
-        busqueda={busqueda} 
-        setBusqueda={setBusqueda} 
-      />
+      <Header cartCount={carrito.length} busqueda={busqueda} setBusqueda={setBusqueda} />
       <Navbar />
       <Banner />
-      
+
       <div className="main-layout">
-        {/* Sidebar va primero para alinearse a la izquierda gracias al CSS Grid */}
         <Sidebar />
-        
-        {/* Renderiza los productos filtrados en tiempo real */}
-        <ProductList 
-          productos={productosFiltrados} 
-          agregarAlCarrito={agregarAlCarrito} 
+        <ProductList
+          productos={productosFiltrados}
+          agregarAlCarrito={agregarAlCarrito}
+          loading={loading}
+          error={error}
         />
       </div>
-      
+
       <Footer />
     </div>
   );

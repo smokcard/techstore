@@ -1,17 +1,19 @@
-import React from 'react';
+import { memo } from 'react';
 
 function SearchBar({ busqueda, setBusqueda }) {
   return (
-    <div className="search-bar">
-      <input 
-        type="text" 
-        placeholder="Buscar productos tecnológicos..." 
+    <label className="search-bar">
+      <input
+        type="text"
+        placeholder="Buscar productos tecnológicos..."
         value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
+        onChange={(event) => setBusqueda(event.target.value)}
       />
-      <button>🔍</button>
-    </div>
+      <button type="button" aria-label="Buscar productos">
+        🔍
+      </button>
+    </label>
   );
 }
 
-export default SearchBar;
+export default memo(SearchBar);

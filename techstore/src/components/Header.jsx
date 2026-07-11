@@ -1,9 +1,15 @@
-import React from 'react';
+import { memo } from 'react';
 import SearchBar from './SearchBar';
 import logoPrincipal from '../assets/logo-principal.png';
 import instagramLogo from '../assets/logo-instagram.png';
 import facebookLogo from '../assets/logo-facebook.png';
 import xLogo from '../assets/logo-x.png';
+
+const socialLinks = [
+  { href: 'https://instagram.com/homeasia_mostazal', src: instagramLogo, alt: 'Instagram' },
+  { href: 'https://facebook.com/VectorGeenk', src: facebookLogo, alt: 'Facebook' },
+  { href: 'https://twitter.com', src: xLogo, alt: 'Twitter (X)' },
+];
 
 function Header({ cartCount, busqueda, setBusqueda }) {
   return (
@@ -14,31 +20,21 @@ function Header({ cartCount, busqueda, setBusqueda }) {
           <span className="logo-text">TechStore</span>
         </a>
       </div>
-      
+
       <SearchBar busqueda={busqueda} setBusqueda={setBusqueda} />
-      
-      <SearchBar busqueda={busqueda} setBusqueda={setBusqueda} />
-      
-      <SearchBar busqueda={busqueda} setBusqueda={setBusqueda} />
-      
-      {/* Redes Sociales con imágenes de logos reales */}
+
       <div className="header-socials">
-        <a href="https://instagram.com/homeasia_mostazal" target="_blank" rel="noreferrer" title="Instagram">
-          <img src={instagramLogo} alt="Instagram" className="social-icon-img" />
-        </a>
-        <a href="https://facebook.com/VectorGeenk" target="_blank" rel="noreferrer" title="Facebook">
-          <img src={facebookLogo} alt="Facebook" className="social-icon-img" />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noreferrer" title="Twitter (X)">
-          <img src={xLogo} alt="Twitter X" className="social-icon-img" />
-        </a>
+        {socialLinks.map(({ href, src, alt }) => (
+          <a key={alt} href={href} target="_blank" rel="noreferrer" title={alt}>
+            <img src={src} alt={alt} className="social-icon-img" />
+          </a>
+        ))}
       </div>
 
-      {/* Botones y carrito abajo a la derecha */}
       <div className="auth-buttons-container">
         <div className="auth-buttons">
-          <button>Iniciar Sesión</button>
-          <button>Registrarse</button>
+          <button type="button">Iniciar Sesión</button>
+          <button type="button">Registrarse</button>
         </div>
         <div className="cart-icon">
           🛒 Carrito: <strong>{cartCount}</strong>
@@ -48,4 +44,4 @@ function Header({ cartCount, busqueda, setBusqueda }) {
   );
 }
 
-export default Header;
+export default memo(Header);

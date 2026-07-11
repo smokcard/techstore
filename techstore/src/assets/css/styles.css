@@ -169,14 +169,18 @@ img {
 
 
 .navbar {
-  background-color: var(--secondary-bg);
+  background: linear-gradient(90deg, var(--secondary-bg), #31195f);
   border-bottom: 2px solid var(--accent-purple);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.18);
 }
 
 .navbar ul {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0 5%;
+  margin: 0 auto;
 }
 
 .navbar ul li a {
@@ -185,12 +189,15 @@ img {
   text-decoration: none;
   padding: 12px 20px;
   font-weight: 600;
-  transition: 0.3s;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border-radius: 6px;
 }
 
 .navbar ul li a:hover {
   background-color: var(--accent-purple);
   color: var(--text-white);
+  transform: translateY(-1px);
 }
 
 

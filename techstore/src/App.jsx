@@ -15,6 +15,7 @@ function App() {
   const [busqueda, setBusqueda] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [theme, setTheme] = useState(() => localStorage.getItem('techstore-theme') || 'dark');
 
   useEffect(() => {
     const controller = new AbortController();
@@ -60,9 +61,20 @@ function App() {
     return productos.filter((prod) => prod.nombre?.toLowerCase().includes(query));
   }, [productos, busqueda]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('techstore-theme', theme);
+  }, [theme]);
+
   return (
     <div className="app-container">
-      <Header cartCount={carrito.length} busqueda={busqueda} setBusqueda={setBusqueda} />
+      <Header
+        cartCount={carrito.length}
+        busqueda={busqueda}
+        setBusqueda={setBusqueda}
+        theme={theme}
+        setTheme={setTheme}
+      />
       <Navbar />
       <Banner />
 

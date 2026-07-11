@@ -11,7 +11,7 @@ const socialLinks = [
   { href: 'https://twitter.com', src: xLogo, alt: 'Twitter (X)' },
 ];
 
-function Header({ cartCount, busqueda, setBusqueda }) {
+function Header({ cartCount, busqueda, setBusqueda, theme, setTheme }) {
   return (
     <header className="header-top">
       <div className="logo-container">
@@ -32,6 +32,15 @@ function Header({ cartCount, busqueda, setBusqueda }) {
       </div>
 
       <div className="auth-buttons-container">
+        <label className="theme-toggle" htmlFor="theme-toggle">
+          <span>{theme === 'dark' ? '🌙' : '☀️'}</span>
+          <input
+            id="theme-toggle"
+            type="checkbox"
+            checked={theme === 'dark'}
+            onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          />
+        </label>
         <div className="auth-buttons">
           <button type="button">Iniciar Sesión</button>
           <button type="button">Registrarse</button>

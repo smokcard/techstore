@@ -2,18 +2,18 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Banner from './components/banner';
-import Sidebar from './components/Sidebar';
 import ProductList from './components/ProductList';
 import Footer from './components/Footer';
 import './assets/css/styles.css';
+import productosData from './data/productos.json';
 
 const API_URL = 'http://localhost:5000/api/productos';
 
 function App() {
-  const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState(productosData);
   const [carrito, setCarrito] = useState([]);
   const [busqueda, setBusqueda] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [theme, setTheme] = useState(() => localStorage.getItem('techstore-theme') || 'dark');
 
@@ -29,11 +29,12 @@ function App() {
         if (!response.ok) throw new Error('No se pudo cargar el catálogo');
 
         const data = await response.json();
-        setProductos(Array.isArray(data) ? data : []);
+        setProductos(Array.isArray(data) ? data : productosData);
       } catch (err) {
         if (err.name !== 'AbortError') {
-          console.error('Error al conectar con MongoDB backend:', err);
-          setError('No fue posible cargar los productos. Intenta nuevamente.');
+          console.warn('Usando catálogo local porque el backend no está disponible:', err.message);
+          setProductos(productosData);
+          setError('');
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -58,7 +59,14 @@ function App() {
     const query = busqueda.trim().toLowerCase();
     if (!query) return productos;
 
-    return productos.filter((prod) => prod.nombre?.toLowerCase().includes(query));
+    return productos.filter((prod) => {
+      const texto = [prod.nombre, prod.categoria, prod.descripcion, prod.marca]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      return texto.includes(query);
+    });
   }, [productos, busqueda]);
 
   useEffect(() => {
@@ -79,7 +87,6 @@ function App() {
       <Banner />
 
       <div className="main-layout">
-        <Sidebar />
         <ProductList
           productos={productosFiltrados}
           agregarAlCarrito={agregarAlCarrito}

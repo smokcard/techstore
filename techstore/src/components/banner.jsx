@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 const Banner = memo(function Banner() {
   return (
-    <section className="banner">
+    <section className="banner" id="inicio">
       <div className="banner-text">
         <h1>Tecnología que te lleva al siguiente nivel</h1>
         <p>Potencia tu setup con componentes seleccionados de alto rendimiento.</p>

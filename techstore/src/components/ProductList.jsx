@@ -4,25 +4,43 @@ import ProductCard from './ProductCard';
 const ProductList = memo(function ProductList({ productos, agregarAlCarrito, loading, error }) {
   if (loading) {
     return (
-      <section className="products-section">
-        <h2 style={{ marginBottom: '15px', color: '#0b2216' }}>Productos Destacados</h2>
-        <p>Cargando productos...</p>
+      <section className="products-section" id="productos">
+        <div className="products-section-header">
+          <div>
+            <p className="products-section-eyebrow">Catálogo</p>
+            <h2 className="products-section-title">Productos Destacados</h2>
+          </div>
+          <p className="products-section-subtitle">Equipos tecnológicos pensados para rendimiento, diseño y confianza.</p>
+        </div>
+        <div className="products-state">Cargando productos...</div>
       </section>
     );
   }
 
   if (error) {
     return (
-      <section className="products-section">
-        <h2 style={{ marginBottom: '15px', color: '#0b2216' }}>Productos Destacados</h2>
-        <p>{error}</p>
+      <section className="products-section" id="productos">
+        <div className="products-section-header">
+          <div>
+            <p className="products-section-eyebrow">Catálogo</p>
+            <h2 className="products-section-title">Productos Destacados</h2>
+          </div>
+          <p className="products-section-subtitle">Equipos tecnológicos pensados para rendimiento, diseño y confianza.</p>
+        </div>
+        <div className="products-state products-state-error">{error}</div>
       </section>
     );
   }
 
   return (
-    <section className="products-section">
-      <h2 style={{ marginBottom: '15px', color: '#0b2216' }}>Productos Destacados</h2>
+    <section className="products-section" id="productos">
+      <div className="products-section-header">
+        <div>
+          <p className="products-section-eyebrow">Catálogo</p>
+          <h2 className="products-section-title">Productos Destacados</h2>
+        </div>
+        <p className="products-section-subtitle">Equipos tecnológicos pensados para rendimiento, diseño y confianza.</p>
+      </div>
       <div className="products-grid">
         {productos.length > 0 ? (
           productos.map((producto) => (
@@ -33,7 +51,7 @@ const ProductList = memo(function ProductList({ productos, agregarAlCarrito, loa
             />
           ))
         ) : (
-          <p>No se encontraron productos coincidentes con tu búsqueda.</p>
+          <div className="products-state">No se encontraron productos coincidentes con tu búsqueda.</div>
         )}
       </div>
     </section>
